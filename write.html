@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publish Invention — InventoSphere</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-text">Invento<span>Sphere</span></div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="index.html#explore-inventions" class="nav-link">Inventions</a></li>
+          <li><a href="write.html" class="nav-link active">Publish Post</a></li>
+          <li><a href="about.html" class="nav-link">About Project</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn-icon" aria-label="Toggle Theme" title="Toggle Theme">
+          <!-- Populated by JS -->
+        </button>
+
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open Navigation Menu">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Editor Container -->
+  <main class="editor-container">
+    <div style="margin-bottom: 2rem;">
+      <a href="index.html" class="back-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+        Back to Inventions
+      </a>
+      <h1 style="font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em;">Publish a New Invention</h1>
+      <p style="color: var(--text-secondary); margin-top: 0.35rem;">
+        Add your original research paper, technological patent analysis, or college engineering project to the blog.
+      </p>
+    </div>
+
+    <!-- Live Preview Box -->
+    <div id="live-preview-box" style="display: none; margin-bottom: 2rem;"></div>
+
+    <form id="new-post-form">
+      <div class="form-group">
+        <label for="post-title" class="form-label">Invention Title *</label>
+        <input 
+          type="text" 
+          id="post-title" 
+          class="form-control" 
+          placeholder="e.g. Neuromorphic Photonic Tensor Cores: Sub-Picosecond AI Inference" 
+          required
+        >
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+        <div class="form-group">
+          <label for="post-category" class="form-label">Technology Category *</label>
+          <select id="post-category" class="form-control" required>
+            <option value="AI">Artificial Intelligence & Neuromorphic</option>
+            <option value="Quantum">Quantum Computing</option>
+            <option value="Robotics">Robotics & Mechatronics</option>
+            <option value="Energy">Clean Energy & Batteries</option>
+            <option value="Biotech">Biotechnology & Gene Editing</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="post-author" class="form-label">Author / Researcher Name *</label>
+          <input 
+            type="text" 
+            id="post-author" 
+            class="form-control" 
+            placeholder="e.g. Alex Rivera, Dept. of Computer Science" 
+            required
+          >
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+        <div class="form-group">
+          <label for="post-spec-area" class="form-label">Innovation Domain</label>
+          <input 
+            type="text" 
+            id="post-spec-area" 
+            class="form-control" 
+            placeholder="e.g. Optical Computing / Edge AI"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="post-spec-metric" class="form-label">Key Benchmark / Breakthrough</label>
+          <input 
+            type="text" 
+            id="post-spec-metric" 
+            class="form-control" 
+            placeholder="e.g. 100x lower energy per MAC operation"
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="post-image" class="form-label">Cover Image URL (Direct link)</label>
+        <input 
+          type="url" 
+          id="post-image" 
+          class="form-control" 
+          placeholder="https://images.unsplash.com/photo-..."
+          value="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80"
+        >
+        <span style="font-size: 0.8rem; color: var(--text-muted);">
+          Tip: You can use free Unsplash or Pexels high-resolution tech image links.
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="post-excerpt" class="form-label">Executive Summary (Excerpt for cards) *</label>
+        <textarea 
+          id="post-excerpt" 
+          class="form-control" 
+          style="min-height: 80px;" 
+          placeholder="A brief 1-2 sentence preview highlighting why this technology invention matters..." 
+          required
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="post-content" class="form-label">Detailed Technical Article (HTML or Paragraphs) *</label>
+        <textarea 
+          id="post-content" 
+          class="form-control" 
+          style="min-height: 250px;" 
+          placeholder="Describe the underlying science, engineering architecture, breakthroughs, real-world applications, and challenges..." 
+          required
+        ></textarea>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: center; justify-content: flex-end; margin-top: 2rem;">
+        <button type="button" id="toggle-preview-btn" class="like-button" style="background: var(--bg-card); font-size: 0.95rem;">
+          👁️ Show Live Preview
+        </button>
+        <button type="submit" class="btn-primary" style="padding: 0.75rem 1.8rem;">
+          🚀 Publish Invention
+        </button>
+      </div>
+    </form>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-bottom" style="border: none; padding-top: 0;">
+      <p>&copy; 2026 InventoSphere — Technology Invention Blog. Created for Academic Evaluation.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/write.js"></script>
+</body>
+</html>

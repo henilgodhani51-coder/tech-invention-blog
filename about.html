@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Project — InventoSphere</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-text">Invento<span>Sphere</span></div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="index.html#explore-inventions" class="nav-link">Inventions</a></li>
+          <li><a href="write.html" class="nav-link">Publish Post</a></li>
+          <li><a href="about.html" class="nav-link active">About Project</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn-icon" aria-label="Toggle Theme" title="Toggle Theme">
+          <!-- Populated by JS -->
+        </button>
+
+        <a href="write.html" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+          New Invention
+        </a>
+
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open Navigation Menu">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="max-width: 900px; margin: 3rem auto 5rem;">
+
+    <!-- Header -->
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <span class="badge badge-ai" style="margin-bottom: 0.75rem;">Academic Capstone Project</span>
+      <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.02em;">
+        InventoSphere: Technology Invention Chronicle
+      </h1>
+      <p style="color: var(--text-secondary); max-width: 650px; margin: 0.85rem auto 0; font-size: 1.1rem;">
+        An interactive, high-performance web platform designed to analyze, document, and showcase breakthrough technological inventions shaping our world.
+      </p>
+    </div>
+
+    <!-- Project Metadata Cards -->
+    <div class="project-details-card">
+      <h2 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 1.25rem;">Project Identification & Academic Credentials</h2>
+      
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>Project Title</h4>
+          <p>InventoSphere — Tech Invention Web Portal</p>
+        </div>
+        <div class="info-box">
+          <h4>Department</h4>
+          <p>Computer Science & Engineering (CSE / IT)</p>
+        </div>
+        <div class="info-box">
+          <h4>Academic Year</h4>
+          <p>Final Year / Semester Project (2026)</p>
+        </div>
+        <div class="info-box">
+          <h4>Project Mentor / Guide</h4>
+          <p>Assistant Professor (Faculty Guide)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Objectives -->
+    <div class="project-details-card">
+      <h2 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 1rem;">Project Objectives</h2>
+      <ul style="margin-left: 1.5rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.65rem; line-height: 1.7;">
+        <li><strong>Knowledge Dissemination:</strong> Provide peer-reviewed quality breakdowns of cutting-edge inventions (BCI, Quantum Computing, Fusion, Bipedal Robotics, and CRISPR).</li>
+        <li><strong>Modern Responsive UX:</strong> Implement contemporary web design standards including dark/light mode, mobile drawer navigation, and glassmorphism.</li>
+        <li><strong>Interactive Data Architecture:</strong> Support client-side post creation, real-time multi-attribute search, tag filtration, bookmarking, and comment persistence.</li>
+        <li><strong>Zero-Cost Cloud Deployment:</strong> Deploy to production using free public HTTPS domains via GitHub Pages or Vercel edge networks.</li>
+      </ul>
+    </div>
+
+    <!-- Tech Stack Used -->
+    <div class="project-details-card">
+      <h2 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 1.25rem;">Technology Stack & Architecture</h2>
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>Frontend Core</h4>
+          <p>Semantic HTML5 + Modern CSS3 (Custom Variables & Flex/Grid)</p>
+        </div>
+        <div class="info-box">
+          <h4>Scripting & Logic</h4>
+          <p>Modern Vanilla JavaScript (ES6+ Modules, DOM API)</p>
+        </div>
+        <div class="info-box">
+          <h4>State & Persistence</h4>
+          <p>Browser LocalStorage + URL Query Parameters</p>
+        </div>
+        <div class="info-box">
+          <h4>Hosting & Free Domain</h4>
+          <p>GitHub Pages (SSL) / Vercel Edge Serverless</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key Features Implemented -->
+    <div class="project-details-card">
+      <h2 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 1rem;">Key Features & Innovations</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin-top: 1rem;">
+        <div style="padding: 1rem; background: var(--bg-secondary); border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+          <h4 style="color: var(--accent-cyan); margin-bottom: 0.35rem;">⚡ Real-time Search Engine</h4>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">Searches across invention titles, excerpts, authors, and categories dynamically with zero page reloads.</p>
+        </div>
+        <div style="padding: 1rem; background: var(--bg-secondary); border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+          <h4 style="color: var(--accent-purple); margin-bottom: 0.35rem;">🌓 Adaptive Theme Engine</h4>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">Persistent dark and light themes with smooth transitions, custom accent gradients, and system preference detection.</p>
+        </div>
+        <div style="padding: 1rem; background: var(--bg-secondary); border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+          <h4 style="color: var(--accent-emerald); margin-bottom: 0.35rem;">📝 Interactive Post Editor</h4>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">Full creation suite with live visual preview, category selection, and instant publication to the feed.</p>
+        </div>
+        <div style="padding: 1rem; background: var(--bg-secondary); border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+          <h4 style="color: var(--accent-rose); margin-bottom: 0.35rem;">💬 Discussion & Likes</h4>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">Integrated engagement tools allowing users to upvote breakthroughs and submit technical comments.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-bottom" style="border: none; padding-top: 0;">
+      <p>&copy; 2026 InventoSphere — Technology Invention Blog. Created for Academic Evaluation.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeToggleBtn = document.getElementById('theme-toggle-btn');
+      const savedTheme = localStorage.getItem('inventosphere_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateThemeIcon(savedTheme);
+
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+          const current = document.documentElement.getAttribute('data-theme');
+          const nextTheme = current === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', nextTheme);
+          localStorage.setItem('inventosphere_theme', nextTheme);
+          updateThemeIcon(nextTheme);
+        });
+      }
+
+      const menuBtn = document.getElementById('mobile-menu-btn');
+      const navMenu = document.getElementById('nav-menu');
+      if (menuBtn && navMenu) {
+        menuBtn.addEventListener('click', () => {
+          navMenu.classList.toggle('show');
+        });
+      }
+    });
+
+    function updateThemeIcon(theme) {
+      const themeToggleBtn = document.getElementById('theme-toggle-btn');
+      if (themeToggleBtn) {
+        themeToggleBtn.innerHTML = theme === 'dark' 
+          ? `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>` 
+          : `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+      }
+    }
+  </script>
+</body>
+</html>

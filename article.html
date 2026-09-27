@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Article Reader — InventoSphere</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress-bar" id="reading-progress-bar"></div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-text">Invento<span>Sphere</span></div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="index.html#explore-inventions" class="nav-link">Inventions</a></li>
+          <li><a href="write.html" class="nav-link">Publish Post</a></li>
+          <li><a href="about.html" class="nav-link">About Project</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn-icon" aria-label="Toggle Theme" title="Toggle Theme">
+          <!-- Populated by JS -->
+        </button>
+
+        <a href="write.html" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+          New Invention
+        </a>
+
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open Navigation Menu">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Article View Container -->
+  <main class="article-container" id="article-content-container">
+    
+    <div class="article-header">
+      <a href="index.html" class="back-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+        Back to All Inventions
+      </a>
+
+      <span id="article-category-badge" class="badge">Invention</span>
+      <h1 id="article-headline" class="article-headline">Loading Invention Article...</h1>
+
+      <div class="card-meta">
+        <div class="meta-author">
+          <div class="meta-avatar" id="article-author-avatar">IT</div>
+          <span id="article-author-name">Researcher</span>
+        </div>
+        <span>•</span>
+        <span id="article-date">Date</span>
+        <span>•</span>
+        <span id="article-readtime">5 min read</span>
+      </div>
+    </div>
+
+    <!-- Hero Image -->
+    <img id="article-hero-img" class="article-hero-img" src="" alt="Technology Invention Image">
+
+    <!-- Article Content & Blueprint -->
+    <div class="article-body" id="article-body-content">
+      <!-- Dynamically filled by article.js -->
+    </div>
+
+    <!-- Article Actions (Like & Share) -->
+    <div class="article-actions">
+      <button class="like-button" id="like-btn" title="Like this innovation">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+        <span>Inspiring Invention (<span id="like-count">0</span>)</span>
+      </button>
+
+      <button class="btn-icon" id="share-btn" style="width: auto; padding: 0.5rem 1rem; border-radius: var(--radius-full); gap: 0.5rem;" title="Share Article">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+        <span>Share</span>
+      </button>
+    </div>
+
+    <!-- Interactive Comments Section -->
+    <section class="comments-section">
+      <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;">Academic Discussion & Feedback</h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">Join the peer discourse on this technological breakthrough.</p>
+
+      <form id="comment-form" class="comment-form">
+        <h4 style="font-size: 1rem; font-weight: 600;">Leave a Technical Comment</h4>
+        <input 
+          type="text" 
+          id="comment-author-input" 
+          class="form-control" 
+          placeholder="Your Name / Academic Role (e.g. CS Student, Professor, Engineer)"
+          required
+        >
+        <textarea 
+          id="comment-text-input" 
+          class="form-control" 
+          style="min-height: 90px;" 
+          placeholder="Write your analysis, questions, or perspectives..."
+          required
+        ></textarea>
+        <button type="submit" class="btn-primary" style="align-self: flex-start;">
+          Post Comment
+        </button>
+      </form>
+
+      <div class="comments-list" id="comments-list">
+        <!-- Rendered by article.js -->
+      </div>
+    </section>
+
+    <!-- Related Articles -->
+    <section style="margin-top: 4.5rem; border-top: 1px solid var(--border-color); padding-top: 3rem;">
+      <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem;">Related Technological Inventions</h3>
+      <div class="posts-grid" id="related-articles-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+        <!-- Rendered by article.js -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-bottom" style="border: none; padding-top: 0;">
+      <p>&copy; 2026 InventoSphere — Technology Invention Blog. Created for Academic Evaluation.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/article.js"></script>
+</body>
+</html>
