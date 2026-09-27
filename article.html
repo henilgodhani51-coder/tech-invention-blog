@@ -11,7 +11,979 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+/* ==========================================================================
+   INVENTOSPHERE - Modern Technology Invention Blog
+   Theme Variables & Modern Glassmorphism Stylesheet
+   ========================================================================== */
+
+:root {
+  /* Dark Theme (Default) */
+  --bg-primary: #0a0d14;
+  --bg-secondary: #111726;
+  --bg-card: rgba(19, 26, 43, 0.7);
+  --bg-card-hover: rgba(27, 37, 62, 0.85);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(0, 240, 255, 0.25);
+  
+  --text-primary: #f0f4f8;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  --accent-cyan: #00f0ff;
+  --accent-purple: #a855f7;
+  --accent-emerald: #10b981;
+  --accent-amber: #f59e0b;
+  --accent-rose: #f43f5e;
+  
+  --gradient-tech: linear-gradient(135deg, #00f0ff 0%, #a855f7 100%);
+  --gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+  
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 25px rgba(0, 240, 255, 0.15);
+  
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  
+  --transition-fast: 0.18s ease;
+  --transition-normal: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  --container-width: 1200px;
+}
+
+[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-card-hover: #ffffff;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-glow: rgba(0, 119, 182, 0.25);
+  
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  
+  --accent-cyan: #0284c7;
+  --accent-purple: #7c3aed;
+  --gradient-tech: linear-gradient(135deg, #0284c7 0%, #7c3aed 100%);
+  --gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%);
+  
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --shadow-glow: 0 0 20px rgba(2, 132, 199, 0.12);
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(0, 240, 255, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 85% 65%, rgba(168, 85, 247, 0.05) 0%, transparent 45%);
+  background-attachment: fixed;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* Utility Containers */
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Navbar */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(10, 13, 20, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-color);
+  transition: var(--transition-normal);
+}
+
+[data-theme="light"] .navbar {
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.brand-icon {
+  width: 38px;
+  height: 38px;
+  background: var(--gradient-tech);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.2rem;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.35);
+}
+
+.brand-text span {
+  background: var(--gradient-tech);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  list-style: none;
+}
+
+.nav-link {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+  position: relative;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--text-primary);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--gradient-tech);
+  border-radius: var(--radius-full);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.btn-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.btn-icon:hover {
+  color: var(--accent-cyan);
+  border-color: var(--border-glow);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--gradient-tech);
+  color: #000;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 14px rgba(0, 240, 255, 0.3);
+  transition: all var(--transition-fast);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 240, 255, 0.5);
+  filter: brightness(1.05);
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+/* Reading Progress Bar */
+.reading-progress-bar {
+  position: fixed;
+  top: 72px;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--gradient-tech);
+  z-index: 999;
+  transition: width 0.1s;
+}
+
+/* Hero Section */
+.hero {
+  padding: 4.5rem 0 3rem;
+  position: relative;
+  text-align: center;
+}
+
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 1rem;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  margin-bottom: 1.5rem;
+}
+
+.hero-pill .dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-cyan);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 240, 255, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 240, 255, 0); }
+}
+
+.hero-title {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.25rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-title span {
+  background: var(--gradient-tech);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  max-width: 650px;
+  margin: 0 auto 2.5rem;
+}
+
+/* Search and Filters Bar */
+.search-filter-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-sm);
+}
+
+.search-box {
+  position: relative;
+  width: 100%;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.85rem 1.2rem 0.85rem 3rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.search-input:focus {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.15);
+}
+
+.category-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.category-pill {
+  padding: 0.45rem 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.category-pill:hover, .category-pill.active {
+  background: rgba(0, 240, 255, 0.12);
+  color: var(--accent-cyan);
+  border-color: rgba(0, 240, 255, 0.4);
+}
+
+/* Featured Article Card */
+.featured-section {
+  margin-bottom: 3.5rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.section-title::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 22px;
+  background: var(--gradient-tech);
+  border-radius: var(--radius-full);
+}
+
+.featured-card {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--transition-normal);
+  backdrop-filter: blur(12px);
+  position: relative;
+}
+
+.featured-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-glow);
+  box-shadow: var(--shadow-glow);
+}
+
+.featured-image-wrapper {
+  position: relative;
+  min-height: 340px;
+  overflow: hidden;
+}
+
+.featured-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.featured-card:hover .featured-image-wrapper img {
+  transform: scale(1.04);
+}
+
+.featured-content {
+  padding: 2.25rem 2.25rem 2.25rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  width: fit-content;
+  margin-bottom: 0.9rem;
+}
+
+.badge-ai { background: rgba(0, 240, 255, 0.15); color: #00f0ff; border: 1px solid rgba(0, 240, 255, 0.3); }
+.badge-quantum { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+.badge-robotics { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+.badge-energy { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+.badge-biotech { background: rgba(244, 63, 94, 0.15); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.3); }
+
+.featured-title {
+  font-size: 1.85rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 0.9rem;
+  letter-spacing: -0.02em;
+}
+
+.featured-title a:hover {
+  color: var(--accent-cyan);
+}
+
+.featured-excerpt {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.meta-author {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.meta-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--gradient-tech);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.75rem;
+  color: #000;
+}
+
+/* Post Cards Grid */
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.post-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+  backdrop-filter: blur(10px);
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--border-glow);
+  box-shadow: var(--shadow-glow);
+}
+
+.post-thumb-wrapper {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.post-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.post-card:hover .post-thumb {
+  transform: scale(1.05);
+}
+
+.post-bookmark-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(10, 13, 20, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.post-bookmark-btn.saved {
+  color: var(--accent-cyan);
+  background: rgba(0, 240, 255, 0.2);
+  border-color: var(--accent-cyan);
+}
+
+.post-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.post-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 0.65rem;
+  letter-spacing: -0.01em;
+}
+
+.post-title a:hover {
+  color: var(--accent-cyan);
+}
+
+.post-desc {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+.post-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 4rem 1rem;
+  grid-column: 1 / -1;
+}
+
+.empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+
+/* Article Reader Page */
+.article-container {
+  max-width: 820px;
+  margin: 2.5rem auto 5rem;
+  padding: 0 1.5rem;
+}
+
+.article-header {
+  margin-bottom: 2.5rem;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  transition: color var(--transition-fast);
+}
+
+.back-link:hover {
+  color: var(--accent-cyan);
+}
+
+.article-headline {
+  font-size: clamp(2rem, 4vw, 2.9rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  margin: 0.8rem 0 1.5rem;
+}
+
+.article-hero-img {
+  width: 100%;
+  max-height: 480px;
+  border-radius: var(--radius-lg);
+  margin-bottom: 2.5rem;
+  border: 1px solid var(--border-color);
+}
+
+.article-body {
+  font-size: 1.12rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+
+.article-body p {
+  margin-bottom: 1.6rem;
+}
+
+.article-body h2 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin: 2.5rem 0 1rem;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.article-body h3 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 1.8rem 0 0.8rem;
+}
+
+.article-body blockquote {
+  border-left: 3px solid var(--accent-cyan);
+  padding: 0.75rem 1.25rem;
+  margin: 1.8rem 0;
+  background: rgba(0, 240, 255, 0.05);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.article-body ul, .article-body ol {
+  margin: 1.2rem 0 1.6rem 1.5rem;
+}
+
+.article-body li {
+  margin-bottom: 0.5rem;
+}
+
+.tech-spec-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.tech-spec-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Article Interaction & Comments */
+.article-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  margin: 3rem 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.like-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.like-button:hover, .like-button.liked {
+  border-color: var(--accent-rose);
+  color: var(--accent-rose);
+  background: rgba(244, 63, 94, 0.1);
+}
+
+.comments-section {
+  margin-top: 3.5rem;
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.comment-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.comment-author {
+  font-weight: 600;
+  color: var(--accent-cyan);
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+  background: var(--bg-card);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+}
+
+/* Write New Post Form */
+.editor-container {
+  max-width: 860px;
+  margin: 3rem auto 5rem;
+  padding: 0 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--text-primary);
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.form-control:focus {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.15);
+}
+
+textarea.form-control {
+  min-height: 200px;
+  resize: vertical;
+}
+
+/* About / College Project Page */
+.project-details-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem;
+  margin-bottom: 2rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.info-box {
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.info-box h4 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.info-box p {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Footer */
+.footer {
+  margin-top: auto;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  padding: 3rem 0 2rem;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-color);
+  padding-top: 1.5rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+  .featured-card {
+    grid-template-columns: 1fr;
+  }
+  
+  .featured-content {
+    padding: 0 1.5rem 1.75rem;
+  }
+  
+  .featured-image-wrapper {
+    min-height: 240px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 72px;
+    left: 0;
+    width: 100%;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1.25rem;
+  }
+  
+  .nav-menu.show {
+    display: flex;
+  }
+  
+  .mobile-menu-btn {
+    display: block;
+  }
+  
+  .posts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+</style>
 </head>
 <body>
 
@@ -154,7 +1126,607 @@
     </div>
   </footer>
 
-  <script src="assets/js/data.js"></script>
-  <script src="assets/js/article.js"></script>
+  <script>
+/**
+ * INVENTOSPHERE - Technology Inventions Data Store
+ * Default articles and localStorage synchronization
+ */
+
+const DEFAULT_POSTS = [
+  {
+    id: "tech-inv-1",
+    title: "Neuralink & Brain-Computer Interfaces: Bridging Thought to Digital Action",
+    slug: "neuralink-brain-computer-interfaces",
+    category: "AI",
+    featured: true,
+    excerpt: "Direct cortical implants and wireless neural telemetry are moving from sci-fi to clinical reality, giving paralyzed individuals seamless telepathic computer control.",
+    readTime: "6 min read",
+    date: "Sep 20, 2026",
+    author: {
+      name: "Aryan Sharma",
+      role: "Lead Research Author",
+      initials: "AS"
+    },
+    image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDcwYTE0Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjMGQxNTI3Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzE1MGEyMSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iY3lhbkdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDBmMGZmIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzcwMDBmZiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxmaWx0ZXIgaWQ9Imdsb3ciIHg9Ii0yMCUiIHk9Ii0yMCUiIHdpZHRoPSIxNDAlIiBoZWlnaHQ9IjE0MCUiPgogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSI2IiByZXN1bHQ9ImJsdXIiLz4KICAgICAgPGZlTWVyZ2U+CiAgICAgICAgPGZlTWVyZ2VOb2RlIGluPSJibHVyIi8+CiAgICAgICAgPGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+CiAgICAgIDwvZmVNZXJnZT4KICAgIDwvZmlsdGVyPgogIDwvZGVmcz4KICAKICA8cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjQ1MCIgZmlsbD0idXJsKCNiZykiLz4KICAKICA8IS0tIENpcmN1aXQgR3JpZCBCYWNrZ3JvdW5kIC0tPgogIDxnIHN0cm9rZT0icmdiYSgwLCAyNDAsIDI1NSwgMC4wOCkiIHN0cm9rZS13aWR0aD0iMS4yIiBmaWxsPSJub25lIj4KICAgIDxwYXRoIGQ9Ik0gMCw1MCBIIDgwMCBNIDAsMTAwIEggODAwIE0gMCwxNTAgSCA4MDAgTSAwLDIwMCBIIDgwMCBNIDAsMjUwIEggODAwIE0gMCwzMDAgSCA4MDAgTSAwLDM1MCBIIDgwMCBNIDAsNDAwIEggODAwIi8+CiAgICA8cGF0aCBkPSJNIDEwMCwwIFYgNDUwIE0gMjAwLDAgViA0NTAgTSAzMDAsMCBWIDQ1MCBNIDQwMCwwIFYgNDUwIE0gNTAwLDAgViA0NTAgTSA2MDAsMCBWIDQ1MCBNIDcwMCwwIFYgNDUwIi8+CiAgPC9nPgogIAogIDwhLS0gTmV1cmFsIE5ldHdvcmsgQ29ubmVjdGlvbnMgLS0+CiAgPGcgc3Ryb2tlPSJ1cmwoI2N5YW5HcmFkKSIgc3Ryb2tlLXdpZHRoPSIyIiBvcGFjaXR5PSIwLjc1IiBmaWx0ZXI9InVybCgjZ2xvdykiPgogICAgPGxpbmUgeDE9IjIyMCIgeTE9IjIyNSIgeDI9IjMyMCIgeTI9IjE0MCIvPgogICAgPGxpbmUgeDE9IjIyMCIgeTE9IjIyNSIgeDI9IjMyMCIgeTI9IjMxMCIvPgogICAgPGxpbmUgeDE9IjMyMCIgeTE9IjE0MCIgeDI9IjQ0MCIgeTI9IjE4MCIvPgogICAgPGxpbmUgeDE9IjMyMCIgeTE9IjMxMCIgeDI9IjQ0MCIgeTI9IjI3MCIvPgogICAgPGxpbmUgeDE9IjQ0MCIgeTE9IjE4MCIgeDI9IjU2MCIgeTI9IjE0MCIvPgogICAgPGxpbmUgeDE9IjQ0MCIgeTE9IjI3MCIgeDI9IjU2MCIgeTI9IjMxMCIvPgogICAgPGxpbmUgeDE9IjU2MCIgeTE9IjE0MCIgeDI9IjY1MCIgeTI9IjIyNSIvPgogICAgPGxpbmUgeDE9IjU2MCIgeTE9IjMxMCIgeDI9IjY1MCIgeTI9IjIyNSIvPgogICAgCiAgICA8bGluZSB4MT0iMzIwIiB5MT0iMTQwIiB4Mj0iNDQwIiB5Mj0iMjcwIi8+CiAgICA8bGluZSB4MT0iMzIwIiB5MT0iMzEwIiB4Mj0iNDQwIiB5Mj0iMTgwIi8+CiAgICA8bGluZSB4MT0iNDQwIiB5MT0iMTgwIiB4Mj0iNDQwIiB5Mj0iMjcwIi8+CiAgPC9nPgogIAogIDwhLS0gTmV1cmFsIE5vZGVzIC0tPgogIDxnIGZpbGw9IiMwMGYwZmYiIGZpbHRlcj0idXJsKCNnbG93KSI+CiAgICA8Y2lyY2xlIGN4PSIyMjAiIGN5PSIyMjUiIHI9IjEwIi8+CiAgICA8Y2lyY2xlIGN4PSIzMjAiIGN5PSIxNDAiIHI9IjE0Ii8+CiAgICA8Y2lyY2xlIGN4PSIzMjAiIGN5PSIzMTAiIHI9IjE0Ii8+CiAgICA8Y2lyY2xlIGN4PSI0NDAiIGN5PSIxODAiIHI9IjE4IiBmaWxsPSIjYTg1NWY3Ii8+CiAgICA8Y2lyY2xlIGN4PSI0NDAiIGN5PSIyNzAiIHI9IjE4IiBmaWxsPSIjYTg1NWY3Ii8+CiAgICA8Y2lyY2xlIGN4PSI1NjAiIGN5PSIxNDAiIHI9IjE0Ii8+CiAgICA8Y2lyY2xlIGN4PSI1NjAiIGN5PSIzMTAiIHI9IjE0Ii8+CiAgICA8Y2lyY2xlIGN4PSI2NTAiIGN5PSIyMjUiIHI9IjEwIi8+CiAgPC9nPgogIAogIDxnIGZpbGw9IiNmZmZmZmYiPgogICAgPGNpcmNsZSBjeD0iMjIwIiBjeT0iMjI1IiByPSI0Ii8+CiAgICA8Y2lyY2xlIGN4PSIzMjAiIGN5PSIxNDAiIHI9IjUiLz4KICAgIDxjaXJjbGUgY3g9IjMyMCIgY3k9IjMxMCIgcj0iNSIvPgogICAgPGNpcmNsZSBjeD0iNDQwIiBjeT0iMTgwIiByPSI3Ii8+CiAgICA8Y2lyY2xlIGN4PSI0NDAiIGN5PSIyNzAiIHI9IjciLz4KICAgIDxjaXJjbGUgY3g9IjU2MCIgY3k9IjE0MCIgcj0iNSIvPgogICAgPGNpcmNsZSBjeD0iNTYwIiBjeT0iMzEwIiByPSI1Ii8+CiAgICA8Y2lyY2xlIGN4PSI2NTAiIGN5PSIyMjUiIHI9IjQiLz4KICA8L2c+CgogIDwhLS0gSGlnaC1UZWNoIExhYmVsIC0tPgogIDx0ZXh0IHg9IjQwMCIgeT0iMzkwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLCAtYXBwbGUtc3lzdGVtLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMDBmMGZmIiBsZXR0ZXItc3BhY2luZz0iNCI+CiAgICBORVVSQUwgSU5URVJGQUNFICZhbXA7IFNZTkFQU0UgQVJDSElURUNUVVJFCiAgPC90ZXh0PgogIDx0ZXh0IHg9IjQwMCIgeT0iNDE1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLCAtYXBwbGUtc3lzdGVtLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEzIiBmb250LXdlaWdodD0iNDAwIiBmaWxsPSIjOTRhM2I4IiBsZXR0ZXItc3BhY2luZz0iMiI+CiAgICAxLDAyNC1DSEFOTkVMIENPUlRJQ0FMIFRFTEVNRVRSWQogIDwvdGV4dD4KPC9zdmc+Cg==",
+    likes: 142,
+    specs: {
+      "Invention Category": "Neurotechnology / Medical Hardware",
+      "Key Innovation": "1,024 micron-scale flexible recording electrodes",
+      "Commercial Horizon": "Human clinical trials actively expanding",
+      "Impact Area": "Paralysis recovery, cognitive enhancement, prosthetic control"
+    },
+    content: `
+      <p>For decades, human interaction with computers has been fundamentally constrained by physical peripherals: keyboards, touchscreens, and mouse cursors. Today, brain-computer interfaces (BCIs)—epitomized by breakthroughs from <strong>Neuralink</strong>, <strong>Synchron</strong>, and academic neuroscience laboratories—are obliterating this physical bottleneck.</p>
+      
+      <h2>The Core Breakthrough: Micron-Scale Neural Threads</h2>
+      <p>Traditional EEG caps detect noisy electric fluctuations through the skull. The radical invention behind modern invasive BCIs lies in inserting ultra-fine, flexible polyimide threads—each thinner than a human hair—directly into the motor cortex without rupturing microvasculature.</p>
+      
+      <blockquote>
+        "By bypassing damaged spinal pathways, high-density neural telemetry translates cortical intention into silicon actions in less than 15 milliseconds."
+      </blockquote>
+
+      <p>Using automated surgical robotics, over a thousand electrodes record individual action potentials. A biocompatible hermetic chip mounted in the cranium digitizes the analog electrical impulses, filters biological noise, and broadcasts commands via custom low-latency Bluetooth to user devices.</p>
+
+      <h2>Real-World Triumphs in Patient Trials</h2>
+      <p>Recent human clinical trials have demonstrated that paralyzed participants can play online chess, browse the internet, control smart home appliances, and even navigate 3D game engines solely by imagining arm and finger movements.</p>
+
+      <h2>Ethical, Security & Regulatory Frontiers</h2>
+      <p>With brain-to-cloud connectivity comes urgent technological hurdles: end-to-end cryptographic authentication of neural streams, preventing biometric side-channel extraction, and long-term electrode bio-integration without immune gliosis.</p>
+    `
+  },
+  {
+    id: "tech-inv-2",
+    title: "Quantum Supremacy & Fault-Tolerant Qubits: Rewriting Computational Physics",
+    slug: "quantum-supremacy-topological-qubits",
+    category: "Quantum",
+    featured: false,
+    excerpt: "How topological qubits and quantum error correction are tackling calculations that would take classical supercomputers thousands of years to simulate.",
+    readTime: "8 min read",
+    date: "Sep 18, 2026",
+    author: {
+      name: "Elena Rostova",
+      role: "Quantum Systems Architect",
+      initials: "ER"
+    },
+    image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmdRIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzBhMDUxOCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iIzE0MGEyZSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwNjBmMjQiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InB1cnBsZUdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjYzA4NGZjIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzM4YmRmOCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxmaWx0ZXIgaWQ9Imdsb3dRIiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTQwJSIgaGVpZ2h0PSIxNDAlIj4KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNyIgcmVzdWx0PSJibHVyIi8+CiAgICAgIDxmZU1lcmdlPgogICAgICAgIDxmZU1lcmdlTm9kZSBpbj0iYmx1ciIvPgogICAgICAgIDxmZU1lcmdlTm9kZSBpbj0iU291cmNlR3JhcGhpYyIvPgogICAgICA8L2ZlTWVyZ2U+CiAgICA8L2ZpbHRlcj4KICA8L2RlZnM+CiAgCiAgPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI0NTAiIGZpbGw9InVybCgjYmdRKSIvPgogIAogIDwhLS0gUXVhbnR1bSBCbG9jaCBTcGhlcmUgUmluZ3MgLS0+CiAgPGcgc3Ryb2tlPSJyZ2JhKDE5MiwgMTMyLCAyNTIsIDAuMjUpIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSI+CiAgICA8Y2lyY2xlIGN4PSI0MDAiIGN5PSIyMTAiIHI9IjE0MCIvPgogICAgPGVsbGlwc2UgY3g9IjQwMCIgY3k9IjIxMCIgcng9IjE0MCIgcnk9IjQ1Ii8+CiAgICA8ZWxsaXBzZSBjeD0iNDAwIiBjeT0iMjEwIiByeD0iNDUiIHJ5PSIxNDAiLz4KICA8L2c+CiAgCiAgPGcgc3Ryb2tlPSJ1cmwoI3B1cnBsZUdyYWQpIiBzdHJva2Utd2lkdGg9IjIuNSIgZmlsbD0ibm9uZSIgZmlsdGVyPSJ1cmwoI2dsb3dRKSI+CiAgICA8IS0tIEVudGFuZ2xlZCBvcmJpdGFsIHJpbmdzIC0tPgogICAgPGVsbGlwc2UgY3g9IjQwMCIgY3k9IjIxMCIgcng9IjE4MCIgcnk9IjcwIiB0cmFuc2Zvcm09InJvdGF0ZSgtMjUgNDAwIDIxMCkiLz4KICAgIDxlbGxpcHNlIGN4PSI0MDAiIGN5PSIyMTAiIHJ4PSIxODAiIHJ5PSI3MCIgdHJhbnNmb3JtPSJyb3RhdGUoMzUgNDAwIDIxMCkiLz4KICA8L2c+CgogIDwhLS0gQ2VudHJhbCBTdXBlcnBvc2l0aW9uIENvcmUgLS0+CiAgPGNpcmNsZSBjeD0iNDAwIiBjeT0iMjEwIiByPSIyOCIgZmlsbD0iI2MwODRmYyIgb3BhY2l0eT0iMC4yNSIgZmlsdGVyPSJ1cmwoI2dsb3dRKSIvPgogIDxjaXJjbGUgY3g9IjQwMCIgY3k9IjIxMCIgcj0iMTYiIGZpbGw9IiMzOGJkZjgiIGZpbHRlcj0idXJsKCNnbG93USkiLz4KICA8Y2lyY2xlIGN4PSI0MDAiIGN5PSIyMTAiIHI9IjYiIGZpbGw9IiNmZmZmZmYiLz4KCiAgPCEtLSBPcmJpdGFsIFF1Yml0cyAtLT4KICA8Y2lyY2xlIGN4PSIyNjAiIGN5PSIxNTAiIHI9IjkiIGZpbGw9IiNjMDg0ZmMiIGZpbHRlcj0idXJsKCNnbG93USkiLz4KICA8Y2lyY2xlIGN4PSI1NDAiIGN5PSIyNzAiIHI9IjkiIGZpbGw9IiMzOGJkZjgiIGZpbHRlcj0idXJsKCNnbG93USkiLz4KICA8Y2lyY2xlIGN4PSIzMjAiIGN5PSIzMTAiIHI9IjgiIGZpbGw9IiNjMDg0ZmMiIGZpbHRlcj0idXJsKCNnbG93USkiLz4KICA8Y2lyY2xlIGN4PSI0ODAiIGN5PSIxMTAiIHI9IjgiIGZpbGw9IiMzOGJkZjgiIGZpbHRlcj0idXJsKCNnbG93USkiLz4KCiAgPCEtLSBIaWdoLVRlY2ggTGFiZWwgLS0+CiAgPHRleHQgeD0iNDAwIiB5PSIzOTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksIC1hcHBsZS1zeXN0ZW0sIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNjMDg0ZmMiIGxldHRlci1zcGFjaW5nPSI0Ij4KICAgIFRPUE9MT0dJQ0FMIFFVQU5UVU0gQ09SRQogIDwvdGV4dD4KICA8dGV4dCB4PSI0MDAiIHk9IjQxNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSwgLWFwcGxlLXN5c3RlbSwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMyIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzk0YTNiOCIgbGV0dGVyLXNwYWNpbmc9IjIiPgogICAgRkFVTFQtVE9MRVJBTlQgU1VSRkFDRSBDT0RFIFFFQyDigKIgMTUgbUsgQ1JZT0dFTklDCiAgPC90ZXh0Pgo8L3N2Zz4K",
+    likes: 98,
+    specs: {
+      "Invention Category": "Quantum Computing & Cryogenic Hardware",
+      "Key Innovation": "Surface-code logical qubits & Majorana zero modes",
+      "Operating Temperature": "15 Millikelvin (-273.135°C)",
+      "Target Applications": "Molecular drug docking, unbreakable cryptography, grid optimization"
+    },
+    content: `
+      <p>Classical computing has reached the atomic physical wall of Moore's Law. Quantum computers, operating on the principles of quantum superposition and entanglement, represent the most profound paradigm shift in processing power since the invention of the transistor in 1947.</p>
+      
+      <h2>Moving Beyond Noisy Intermediate-Scale Quantum (NISQ)</h2>
+      <p>The historical challenge with quantum processors was <em>decoherence</em>—environmental thermal noise causing sensitive physical qubits to lose their quantum state within microseconds. The invention of real-time <strong>surface code quantum error correction (QEC)</strong> enables thousands of noisy physical qubits to be entangled into a single, bulletproof <em>logical qubit</em>.</p>
+      
+      <h2>Revolutionizing Chemistry & Material Science</h2>
+      <p>Classical supercomputers must approximate quantum mechanical interactions when simulating complex molecules. A fault-tolerant 1,000-logical-qubit processor can simulate room-temperature nitrogen fixation enzymes, potentially cutting global fertilizer production energy expenditures by up to 2% globally.</p>
+    `
+  },
+  {
+    id: "tech-inv-3",
+    title: "Next-Gen Humanoid Robots: Combining Embodied AI with Biomorphic Actuation",
+    slug: "embodied-ai-humanoid-robotics",
+    category: "Robotics",
+    featured: false,
+    excerpt: "With Vision-Language-Action (VLA) foundation models and rotary quasi-direct drives, general-purpose humanoid robots are stepping out of lab demos into industrial floors.",
+    readTime: "5 min read",
+    date: "Sep 14, 2026",
+    author: {
+      name: "Marcus Chen",
+      role: "Mechatronics Engineer",
+      initials: "MC"
+    },
+    image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmdSIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzE0MGQwNSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iIzFmMTQwNiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwYTBlMWEiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImFtYmVyR3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmNTllMGIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmJiZjI0Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iZ2xvd1IiIHg9Ii0yMCUiIHk9Ii0yMCUiIHdpZHRoPSIxNDAlIiBoZWlnaHQ9IjE0MCUiPgogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSI2IiByZXN1bHQ9ImJsdXIiLz4KICAgICAgPGZlTWVyZ2U+CiAgICAgICAgPGZlTWVyZ2VOb2RlIGluPSJibHVyIi8+CiAgICAgICAgPGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+CiAgICAgIDwvZmVNZXJnZT4KICAgIDwvZmlsdGVyPgogIDwvZGVmcz4KICAKICA8cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjQ1MCIgZmlsbD0idXJsKCNiZ1IpIi8+CiAgCiAgPCEtLSBSb2JvdCBIZWFkIC8gVmlzb3IgU2lsaG91ZXR0ZSBPdXRsaW5lIC0tPgogIDxnIHN0cm9rZT0idXJsKCNhbWJlckdyYWQpIiBzdHJva2Utd2lkdGg9IjIuNSIgZmlsbD0ibm9uZSIgZmlsdGVyPSJ1cmwoI2dsb3dSKSI+CiAgICA8IS0tIEhlYWQgT3V0bGluZSAtLT4KICAgIDxwYXRoIGQ9Ik0gMzMwLDEzMCBDIDMzMCw5MCA0NzAsOTAgNDcwLDEzMCBMIDQ4NSwyMTAgQyA0ODUsMjgwIDQzNSwzMTAgNDAwLDMxMCBDIDM2NSwzMTAgMzE1LDI4MCAzMTUsMjEwIFoiLz4KICAgIDwhLS0gQ3liZXIgVmlzb3IgLS0+CiAgICA8cGF0aCBkPSJNIDMyNSwxODUgTCA0NzUsMTg1IEwgNDY1LDIyMCBMIDMzNSwyMjAgWiIgZmlsbD0icmdiYSgyNDUsIDE1OCwgMTEsIDAuMikiLz4KICAgIDwhLS0gTmVjayBKb2ludHMgLS0+CiAgICA8bGluZSB4MT0iMzc1IiB5MT0iMzEwIiB4Mj0iMzc1IiB5Mj0iMzUwIi8+CiAgICA8bGluZSB4MT0iNDI1IiB5MT0iMzEwIiB4Mj0iNDI1IiB5Mj0iMzUwIi8+CiAgICA8IS0tIENvbGxhciBQbGF0ZSAtLT4KICAgIDxwYXRoIGQ9Ik0gMzAwLDM2MCBMIDUwMCwzNjAgTCA1MjAsMzgwIEwgMjgwLDM4MCBaIi8+CiAgPC9nPgogIAogIDwhLS0gVmlzb3IgR2xvd2luZyBTZW5zb3IgU3RyZWFtIC0tPgogIDxsaW5lIHgxPSIzNDAiIHkxPSIyMDIiIHgyPSI0NjAiIHkyPSIyMDIiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIzIiBmaWx0ZXI9InVybCgjZ2xvd1IpIi8+CiAgCiAgPCEtLSBUZWNobmljYWwgRGF0YSBNYXJrZXJzIC0tPgogIDxnIGZpbGw9IiNmYmJmMjQiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksIG1vbm9zcGFjZSIgZm9udC1zaXplPSIxMSIgb3BhY2l0eT0iMC44NSI+CiAgICA8dGV4dCB4PSI1MTAiIHk9IjE1MCI+WyBET0Y6IDQyLUFYSVMgXTwvdGV4dD4KICAgIDx0ZXh0IHg9IjUxMCIgeT0iMTc1Ij5bIFZMQS1GT1VOREFUSU9OIF08L3RleHQ+CiAgICA8dGV4dCB4PSI1MTAiIHk9IjIwMCI+WyBUT1JRVUU6IDE4MCBObSBdPC90ZXh0PgogICAgPGxpbmUgeDE9IjQ3NSIgeTE9IjE5NSIgeDI9IjUwNSIgeTI9IjE5NSIgc3Ryb2tlPSIjZmJiZjI0IiBzdHJva2Utd2lkdGg9IjEiLz4KICAgIAogICAgPHRleHQgeD0iMTgwIiB5PSIxNTAiPlsgSU1VOiA2LUFYSVMgRFVBTCBdPC90ZXh0PgogICAgPHRleHQgeD0iMTgwIiB5PSIxNzUiPlsgU1RFUkVPIFJHQi1EIF08L3RleHQ+CiAgICA8dGV4dCB4PSIxODAiIHk9IjIwMCI+WyBMQVRFTkNZOiA4bXMgXTwvdGV4dD4KICAgIDxsaW5lIHgxPSIzMjUiIHkxPSIxOTUiIHgyPSIyOTUiIHkyPSIxOTUiIHN0cm9rZT0iI2ZiYmYyNCIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPC9nPgoKICA8IS0tIEhpZ2gtVGVjaCBMYWJlbCAtLT4KICA8dGV4dCB4PSI0MDAiIHk9IjQxMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSwgLWFwcGxlLXN5c3RlbSwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZiYmYyNCIgbGV0dGVyLXNwYWNpbmc9IjQiPgogICAgRU1CT0RJRUQgSFVNQU5PSUQgQUNUVUFUSU9OCiAgPC90ZXh0PgogIDx0ZXh0IHg9IjQwMCIgeT0iNDMyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLCAtYXBwbGUtc3lzdGVtLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNDAwIiBmaWxsPSIjOTRhM2I4IiBsZXR0ZXItc3BhY2luZz0iMiI+CiAgICBWSVNJT04tTEFOR1VBR0UtQUNUSU9OIE1PVE9SIFBPTElDSUVTCiAgPC90ZXh0Pgo8L3N2Zz4K",
+    likes: 115,
+    specs: {
+      "Invention Category": "Embodied AI & Advanced Mechatronics",
+      "Key Innovation": "End-to-end multimodal Vision-Language-Action neural networks",
+      "Degrees of Freedom": "40+ active DOF including tactile dexterous hands",
+      "Primary Industries": "Automotive assembly lines, hazardous logistics, elder assistance"
+    },
+    content: `
+      <p>Robots have spent decades locked behind safety cages on car assembly lines, repeating hard-coded trajectories. The convergence of <strong>Embodied AI</strong> and advanced planetary gear actuators has created an entirely new species: autonomous, self-balancing bipedal humanoids.</p>
+
+      <h2>The Paradigm Shift: From Hardcoded Trajectories to Neural Motor Policies</h2>
+      <p>Instead of calculating complex inverse kinematics in real time using analytic physics models, contemporary robots utilize deep reinforcement learning combined with billions of simulated training hours in NVIDIA Isaac Sim and Isaac Gym.</p>
+
+      <blockquote>
+        "Humanoid robots don't just calculate coordinates anymore—they observe human demonstrator video clips and synthesize dynamic balance and torque compensation autonomously."
+      </blockquote>
+
+      <h2>Sensory Skin & Dexterous 5-Finger Manipulation</h2>
+      <p>The human hand contains thousands of mechanoreceptors. New optical and piezo-resistive tactile arrays lining robotic fingertips allow robots to grasp delicate eggs, assemble screws, and fold laundry without crushing or dropping objects.</p>
+    `
+  },
+  {
+    id: "tech-inv-4",
+    title: "Net-Energy Nuclear Fusion: Magnetic Confinement with High-Temperature Superconductors",
+    slug: "net-energy-nuclear-fusion-tokamaks",
+    category: "Energy",
+    featured: false,
+    excerpt: "Compact Tokamaks utilizing REBCO high-temperature superconducting tape are generating record magnetic fields, opening the gateway to zero-carbon unlimited baseload power.",
+    readTime: "7 min read",
+    date: "Sep 10, 2026",
+    author: {
+      name: "Dr. Sarah Jenkins",
+      role: "Plasma Physicist",
+      initials: "SJ"
+    },
+    image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmdGIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzA1MTQxMCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iIzA4MjIxOCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwYTEyMjQiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImVuZXJneUdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMTBiOTgxIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwZjBmZiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxmaWx0ZXIgaWQ9Imdsb3dGIiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTQwJSIgaGVpZ2h0PSIxNDAlIj4KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iOCIgcmVzdWx0PSJibHVyIi8+CiAgICAgIDxmZU1lcmdlPgogICAgICAgIDxmZU1lcmdlTm9kZSBpbj0iYmx1ciIvPgogICAgICAgIDxmZU1lcmdlTm9kZSBpbj0iU291cmNlR3JhcGhpYyIvPgogICAgICA8L2ZlTWVyZ2U+CiAgICA8L2ZpbHRlcj4KICA8L2RlZnM+CiAgCiAgPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI0NTAiIGZpbGw9InVybCgjYmdGKSIvPgogIAogIDwhLS0gVG9rYW1hayBUb3JvaWRhbCBDb2lscyAtLT4KICA8ZyBzdHJva2U9InJnYmEoMTYsIDE4NSwgMTI5LCAwLjMpIiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2UgY3g9IjQwMCIgY3k9IjIwMCIgcng9IjIyMCIgcnk9IjExMCIvPgogICAgPGVsbGlwc2UgY3g9IjQwMCIgY3k9IjIwMCIgcng9IjE0MCIgcnk9IjcwIi8+CiAgICA8ZWxsaXBzZSBjeD0iNDAwIiBjeT0iMjAwIiByeD0iNzAiIHJ5PSIzNSIvPgogIDwvZz4KICAKICA8IS0tIFN1cGVyaGVhdGVkIEJ1cm5pbmcgUGxhc21hIFRvcnVzIC0tPgogIDxnIHN0cm9rZT0idXJsKCNlbmVyZ3lHcmFkKSIgc3Ryb2tlLXdpZHRoPSI4IiBmaWxsPSJub25lIiBvcGFjaXR5PSIwLjg1IiBmaWx0ZXI9InVybCgjZ2xvd0YpIj4KICAgIDxlbGxpcHNlIGN4PSI0MDAiIGN5PSIyMDAiIHJ4PSIxNjAiIHJ5PSI4MCIvPgogIDwvZz4KICA8ZyBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgZmlsdGVyPSJ1cmwoI2dsb3dGKSI+CiAgICA8ZWxsaXBzZSBjeD0iNDAwIiBjeT0iMjAwIiByeD0iMTYwIiByeT0iODAiLz4KICA8L2c+CgogIDwhLS0gTWFnbmV0aWMgQ29uZmluZW1lbnQgRmllbGQgTGluZXMgLS0+CiAgPGcgc3Ryb2tlPSIjMDBmMGZmIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iMC42Ij4KICAgIDxwYXRoIGQ9Ik0gMjQwLDIwMCBDIDI0MCwxMTAgMzIwLDgwIDQwMCw4MCBDIDQ4MCw4MCA1NjAsMTEwIDU2MCwyMDAgQyA1NjAsMjkwIDQ4MCwzMjAgNDAwLDMyMCBDIDMyMCwzMjAgMjQwLDI5MCAyNDAsMjAwIFoiLz4KICAgIDxwYXRoIGQ9Ik0gMjgwLDIwMCBDIDI4MCwxNDAgMzQwLDEyMCA0MDAsMTIwIEMgNDYwLDEyMCA1MjAsMTQwIDUyMCwyMDAgQyA1MjAsMjYwIDQ2MCwyODAgNDAwLDI4MCBDIDM0MCwyODAgMjgwLDI2MCAyODAsMjAwIFoiLz4KICA8L2c+CgogIDwhLS0gSGlnaC1UZWNoIExhYmVsIC0tPgogIDx0ZXh0IHg9IjQwMCIgeT0iMzg1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLCAtYXBwbGUtc3lzdGVtLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMzRkMzk5IiBsZXR0ZXItc3BhY2luZz0iNCI+CiAgICBSRUJDTyBNQUdORVRJQyBGVVNJT04gVE9LQU1BSwogIDwvdGV4dD4KICA8dGV4dCB4PSI0MDAiIHk9IjQxMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSwgLWFwcGxlLXN5c3RlbSwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMyIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzk0YTNiOCIgbGV0dGVyLXNwYWNpbmc9IjIiPgogICAgMjAtVEVTTEEgSFRTIEZJRUxEIOKAoiBORVQtUE9TSVRJVkUgUSA+IDEwIEVORVJHWSBHQUlOCiAgPC90ZXh0Pgo8L3N2Zz4K",
+    likes: 210,
+    specs: {
+      "Invention Category": "Clean Baseload Energy & Plasma Physics",
+      "Key Innovation": "REBCO High-Temperature Superconductor (HTS) magnets (20+ Tesla)",
+      "Fuel Source": "Deuterium and Tritium (derived from water and lithium)",
+      "Target Energy Gain": "Q > 10 (producing 10x more thermal energy than injected)"
+    },
+    content: `
+      <p>Nuclear fusion—the process that powers our Sun—has long been ridiculed with the adage: <em>'fusion is 30 years away and always will be.'</em> That cynical narrative is being permanently shattered by unprecedented private and national lab breakthroughs.</p>
+
+      <h2>Why HTS Magnets Changed the Physics Equations</h2>
+      <p>Traditional tokamaks like ITER relied on low-temperature superconductors requiring liquid helium refrigeration down to 4 Kelvin, limiting magnetic field strength to ~12 Tesla. The advent of Rare-Earth Barium Copper Oxide (REBCO) tapes allows confinement magnets to generate over 20 Tesla at higher cryogenic temperatures.</p>
+
+      <p>Because fusion plasma output scales with the <strong>fourth power of the magnetic field</strong> ($B^4$), doubling the magnetic field strength allows a reactor to achieve the same plasma confinement in a volume that is <strong>40 times smaller</strong>!</p>
+    `
+  },
+  {
+    id: "tech-inv-5",
+    title: "Prime & Epigenome Editing: Programming the Genome Without Double-Strand DNA Breaks",
+    slug: "crispr-prime-editing-epigenetics",
+    category: "Biotech",
+    featured: false,
+    excerpt: "Beyond standard CRISPR-Cas9 shears, search-and-replace prime editing and CRISPRoff epigenetic switches are curing hereditary diseases with atomic molecular precision.",
+    readTime: "6 min read",
+    date: "Sep 05, 2026",
+    author: {
+      name: "Dr. Vikram Patel",
+      role: "Synthetic Biologist",
+      initials: "VP"
+    },
+    image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmdCIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzE5MDYwZSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iIzI2MGIxOCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwYTBmMjQiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InJvc2VHcmFkIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y0M2Y1ZSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM4MThjZjgiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8ZmlsdGVyIGlkPSJnbG93QiIgeD0iLTIwJSIgeT0iLTIwJSIgd2lkdGg9IjE0MCUiIGhlaWdodD0iMTQwJSI+CiAgICAgIDxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjYiIHJlc3VsdD0iYmx1ciIvPgogICAgICA8ZmVNZXJnZT4KICAgICAgICA8ZmVNZXJnZU5vZGUgaW49ImJsdXIiLz4KICAgICAgICA8ZmVNZXJnZU5vZGUgaW49IlNvdXJjZUdyYXBoaWMiLz4KICAgICAgPC9mZU1lcmdlPgogICAgPC9maWx0ZXI+CiAgPC9kZWZzPgogIAogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2JnQikiLz4KICAKICA8IS0tIEROQSBEb3VibGUgSGVsaXggV2F2ZXMgLS0+CiAgPGcgc3Ryb2tlPSJ1cmwoI3Jvc2VHcmFkKSIgc3Ryb2tlLXdpZHRoPSIzIiBmaWxsPSJub25lIiBmaWx0ZXI9InVybCgjZ2xvd0IpIj4KICAgIDwhLS0gU3RyYW5kIDEgLS0+CiAgICA8cGF0aCBkPSJNIDE1MCwyMTAgUSAyMjUsMTIwIDMwMCwyMTAgVCA0NTAsMjEwIFQgNjAwLDIxMCBUIDcwMCwyMTAiLz4KICAgIDwhLS0gU3RyYW5kIDIgLS0+CiAgICA8cGF0aCBkPSJNIDE1MCwyMTAgUSAyMjUsMzAwIDMwMCwyMTAgVCA0NTAsMjEwIFQgNjAwLDIxMCBUIDcwMCwyMTAiLz4KICA8L2c+CiAgCiAgPCEtLSBCYXNlIFBhaXJzIEJyaWRnZXMgJiBOb2RlcyAtLT4KICA8ZyBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMiIgb3BhY2l0eT0iMC42Ij4KICAgIDxsaW5lIHgxPSIyMjUiIHkxPSIxMzUiIHgyPSIyMjUiIHkyPSIyODUiLz4KICAgIDxsaW5lIHgxPSIyNjIiIHkxPSIxNjUiIHgyPSIyNjIiIHkyPSIyNTUiLz4KICAgIDxsaW5lIHgxPSIzMzgiIHkxPSIyNTUiIHgyPSIzMzgiIHkyPSIxNjUiLz4KICAgIDxsaW5lIHgxPSIzNzUiIHkxPSIyODUiIHgyPSIzNzUiIHkyPSIxMzUiLz4KICAgIDxsaW5lIHgxPSI0MTIiIHkxPSIyNTUiIHgyPSI0MTIiIHkyPSIxNjUiLz4KICAgIDxsaW5lIHgxPSI0ODgiIHkxPSIxNjUiIHgyPSI0ODgiIHkyPSIyNTUiLz4KICAgIDxsaW5lIHgxPSI1MjUiIHkxPSIxMzUiIHgyPSI1MjUiIHkyPSIyODUiLz4KICAgIDxsaW5lIHgxPSI1NjIiIHkxPSIxNjUiIHgyPSI1NjIiIHkyPSIyNTUiLz4KICAgIDxsaW5lIHgxPSI2MzgiIHkxPSIyNTUiIHgyPSI2MzgiIHkyPSIxNjUiLz4KICA8L2c+CgogIDwhLS0gR2VuZXRpYyBCYXNlIFBhaXIgU3BoZXJlcyAtLT4KICA8ZyBmaWxsPSIjZmI3MTg1IiBmaWx0ZXI9InVybCgjZ2xvd0IpIj4KICAgIDxjaXJjbGUgY3g9IjIyNSIgY3k9IjEzNSIgcj0iNyIvPgogICAgPGNpcmNsZSBjeD0iMzc1IiBjeT0iMTM1IiByPSI3Ii8+CiAgICA8Y2lyY2xlIGN4PSI1MjUiIGN5PSIxMzUiIHI9IjciLz4KICAgIDxjaXJjbGUgY3g9IjIyNSIgY3k9IjI4NSIgcj0iNyIgZmlsbD0iIzgxOGNmOCIvPgogICAgPGNpcmNsZSBjeD0iMzc1IiBjeT0iMjg1IiByPSI3IiBmaWxsPSIjODE4Y2Y4Ii8+CiAgICA8Y2lyY2xlIGN4PSI1MjUiIGN5PSIyODUiIHI9IjciIGZpbGw9IiM4MThjZjgiLz4KICA8L2c+CgogIDwhLS0gSGlnaC1UZWNoIExhYmVsIC0tPgogIDx0ZXh0IHg9IjQwMCIgeT0iMzg1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLCAtYXBwbGUtc3lzdGVtLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjZmI3MTg1IiBsZXR0ZXItc3BhY2luZz0iNCI+CiAgICBQUklNRSAmYW1wOyBFUElHRU5PTUUgRURJVElORwogIDwvdGV4dD4KICA8dGV4dCB4PSI0MDAiIHk9IjQxMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSwgLWFwcGxlLXN5c3RlbSwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMyIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzk0YTNiOCIgbGV0dGVyLXNwYWNpbmc9IjIiPgogICAgU0VBUkNILUFORC1SRVBMQUNFIFdJVEhPVVQgRE9VQkxFLVNUUkFORCBCUkVBS1MKICA8L3RleHQ+Cjwvc3ZnPgo=",
+    likes: 83,
+    specs: {
+      "Invention Category": "Genetic Engineering & Molecular Therapeutics",
+      "Key Innovation": "Cas9 nickase fused with engineered reverse transcriptase",
+      "Precision Level": "Single base substitution without double-strand breaks",
+      "Target Pathologies": "Sickle cell anemia, Huntington's, cystic fibrosis, high LDL cholesterol"
+    },
+    content: `
+      <p>When CRISPR-Cas9 emerged in 2012, it functioned essentially like molecular scissors: cutting both strands of DNA to disrupt target genes. However, double-stranded breaks frequently led to uncontrolled insertions, deletions (indels), and chromosomal translocations.</p>
+
+      <h2>The Invention of Molecular Word Processors</h2>
+      <p>Invented at the Broad Institute of MIT and Harvard, <strong>Prime Editing</strong> acts not as scissors, but as a full 'search-and-replace' word processor for genomic DNA. By pairing an impaired Cas9 nickase with an engineered reverse transcriptase and prime editing guide RNA (pegRNA), scientists can write new genetic sequences directly into designated genomic loci without breaking both DNA backbones.</p>
+    `
+  },
+  {
+    id: "tech-inv-6",
+    title: "All-Solid-State Batteries: Silicon Anodes & Ceramic Solid Electrolytes",
+    slug: "solid-state-batteries-silicon-anodes",
+    category: "Energy",
+    featured: false,
+    excerpt: "Replacing volatile liquid organic electrolytes with non-flammable solid ceramic conductors will double EV driving range and enable 10-minute ultra-fast charging.",
+    readTime: "5 min read",
+    date: "Aug 29, 2026",
+    author: {
+      name: "Kavita Nair",
+      role: "Materials Science Fellow",
+      initials: "KN"
+    },
+    image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmdCYXQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDUxNDFiIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjMDgyNTMxIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzBhMTIyNCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmF0R3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMwMGYwZmYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMTBiOTgxIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iZ2xvd0JhdCIgeD0iLTIwJSIgeT0iLTIwJSIgd2lkdGg9IjE0MCUiIGhlaWdodD0iMTQwJSI+CiAgICAgIDxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjYiIHJlc3VsdD0iYmx1ciIvPgogICAgICA8ZmVNZXJnZT4KICAgICAgICA8ZmVNZXJnZU5vZGUgaW49ImJsdXIiLz4KICAgICAgICA8ZmVNZXJnZU5vZGUgaW49IlNvdXJjZUdyYXBoaWMiLz4KICAgICAgPC9mZU1lcmdlPgogICAgPC9maWx0ZXI+CiAgPC9kZWZzPgogIAogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2JnQmF0KSIvPgogIAogIDwhLS0gQmF0dGVyeSBDYXNpbmcgLS0+CiAgPGcgc3Ryb2tlPSJ1cmwoI2JhdEdyYWQpIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiIGZpbHRlcj0idXJsKCNnbG93QmF0KSI+CiAgICA8cmVjdCB4PSIyMjAiIHk9IjE0MCIgd2lkdGg9IjM0MCIgaGVpZ2h0PSIxNTAiIHJ4PSIxNiIvPgogICAgPCEtLSBUZXJtaW5hbCBDYXAgLS0+CiAgICA8cGF0aCBkPSJNIDU2MCwxODUgTCA1ODUsMTg1IEwgNTg1LDI0NSBMIDU2MCwyNDUgWiIgZmlsbD0iIzAwZjBmZiIvPgogIDwvZz4KICAKICA8IS0tIFNvbGlkIENlcmFtaWMgRWxlY3Ryb2x5dGUgTGF5ZXIgJiBJb24gRmxvdyAtLT4KICA8ZyBmaWxsPSJyZ2JhKDAsIDI0MCwgMjU1LCAwLjE1KSI+CiAgICA8cmVjdCB4PSIyMzUiIHk9IjE1NSIgd2lkdGg9IjgwIiBoZWlnaHQ9IjEyMCIgcng9IjgiLz4KICAgIDxyZWN0IHg9IjMzMCIgeT0iMTU1IiB3aWR0aD0iODAiIGhlaWdodD0iMTIwIiByeD0iOCIgZmlsbD0icmdiYSgxNiwgMTg1LCAxMjksIDAuMikiLz4KICAgIDxyZWN0IHg9IjQyNSIgeT0iMTU1IiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgcng9IjgiIGZpbGw9InJnYmEoMCwgMjQwLCAyNTUsIDAuMykiLz4KICA8L2c+CgogIDwhLS0gR2xvd2luZyBMaWdodG5pbmcgLyBQb3dlciBWZWN0b3IgLS0+CiAgPHBhdGggZD0iTSAzOTAsMTY1IEwgMzY1LDIxNSBMIDM5NSwyMTUgTCAzNzUsMjY1IEwgNDI1LDIwNSBMIDM5NSwyMDUgWiIgZmlsbD0iIzAwZjBmZiIgZmlsdGVyPSJ1cmwoI2dsb3dCYXQpIi8+CiAgPHBhdGggZD0iTSAzOTAsMTY1IEwgMzY1LDIxNSBMIDM5NSwyMTUgTCAzNzUsMjY1IEwgNDI1LDIwNSBMIDM5NSwyMDUgWiIgZmlsbD0iI2ZmZmZmZiIgb3BhY2l0eT0iMC44Ii8+CgogIDwhLS0gSGlnaC1UZWNoIExhYmVsIC0tPgogIDx0ZXh0IHg9IjQwMCIgeT0iMzg1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLCAtYXBwbGUtc3lzdGVtLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMDBmMGZmIiBsZXR0ZXItc3BhY2luZz0iNCI+CiAgICBBTEwtU09MSUQtU1RBVEUgQ0VSQU1JQyBCQVRURVJZCiAgPC90ZXh0PgogIDx0ZXh0IHg9IjQwMCIgeT0iNDEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLCAtYXBwbGUtc3lzdGVtLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEzIiBmb250LXdlaWdodD0iNDAwIiBmaWxsPSIjOTRhM2I4IiBsZXR0ZXItc3BhY2luZz0iMiI+CiAgICBTSUxJQ09OIEFOT0RFUyDigKIgNDUwIFdoL2tnIERFTlNJVFkg4oCiIFpFUk8gVEhFUk1BTCBSVU5BV0FZCiAgPC90ZXh0Pgo8L3N2Zz4K",
+    likes: 124,
+    specs: {
+      "Invention Category": "Energy Storage & Electrochemistry",
+      "Key Innovation": "Sulfide / Oxide solid ceramic electrolyte separator",
+      "Energy Density": "> 450 Wh/kg (vs ~260 Wh/kg for standard Li-ion)",
+      "Charging Time": "10% to 80% in under 12 minutes without thermal runaway"
+    },
+    content: `
+      <p>Today's electric vehicles and smart gadgets are powered by lithium-ion cells with flammable liquid electrolyte solutions. While dense, they risk thermal runaway when punctured, and degrade rapidly in extreme temperatures.</p>
+
+      <h2>The Solid Electrolyte Revolution</h2>
+      <p>Solid-state batteries (SSBs) eliminate liquid solvents entirely, employing rigid ceramic or sulfide solid separators. This architecture eliminates dendrite short-circuits, unlocks pure lithium-metal or high-capacity silicon anodes, and virtually eliminates fire risks.</p>
+    `
+  }
+];
+
+// LocalStorage Keys
+const STORAGE_KEYS = {
+  POSTS: 'inventosphere_posts',
+  SAVED_BOOKMARKS: 'inventosphere_bookmarks',
+  LIKES: 'inventosphere_likes',
+  COMMENTS: 'inventosphere_comments',
+  THEME: 'inventosphere_theme'
+};
+
+/**
+ * Initializes and retrieves all posts (defaults + custom user posts)
+ */
+function getAllPosts() {
+  const customPosts = JSON.parse(localStorage.getItem(STORAGE_KEYS.POSTS) || '[]');
+  // Merge custom posts first so new user additions show on top
+  return [...customPosts, ...DEFAULT_POSTS];
+}
+
+/**
+ * Finds a specific post by ID or Slug
+ */
+function getPostByIdOrSlug(identifier) {
+  const posts = getAllPosts();
+  return posts.find(p => p.id === identifier || p.slug === identifier) || null;
+}
+
+/**
+ * Saves a new post submitted by the user
+ */
+function saveNewPost(postData) {
+  const currentCustom = JSON.parse(localStorage.getItem(STORAGE_KEYS.POSTS) || '[]');
+  const newPost = {
+    ...postData,
+    id: 'user-inv-' + Date.now(),
+    slug: postData.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''),
+    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+    likes: 0,
+    readTime: Math.ceil(postData.content.split(' ').length / 180) + ' min read',
+    featured: false
+  };
+  
+  currentCustom.unshift(newPost);
+  localStorage.setItem(STORAGE_KEYS.POSTS, JSON.stringify(currentCustom));
+  return newPost;
+}
+
+/**
+ * Bookmark Management
+ */
+function getBookmarks() {
+  return JSON.parse(localStorage.getItem(STORAGE_KEYS.SAVED_BOOKMARKS) || '[]');
+}
+
+function toggleBookmark(postId) {
+  const bookmarks = getBookmarks();
+  const index = bookmarks.indexOf(postId);
+  if (index > -1) {
+    bookmarks.splice(index, 1);
+  } else {
+    bookmarks.push(postId);
+  }
+  localStorage.setItem(STORAGE_KEYS.SAVED_BOOKMARKS, JSON.stringify(bookmarks));
+  return bookmarks.includes(postId);
+}
+
+function isBookmarked(postId) {
+  return getBookmarks().includes(postId);
+}
+
+/**
+ * Comments Management
+ */
+function getComments(postId) {
+  const allComments = JSON.parse(localStorage.getItem(STORAGE_KEYS.COMMENTS) || '{}');
+  return allComments[postId] || [
+    {
+      author: "Student Researcher",
+      date: "Just now",
+      text: "Fascinating invention! The implications for future technological integration are tremendous."
+    }
+  ];
+}
+
+function addComment(postId, comment) {
+  const allComments = JSON.parse(localStorage.getItem(STORAGE_KEYS.COMMENTS) || '{}');
+  if (!allComments[postId]) {
+    allComments[postId] = [];
+  }
+  allComments[postId].unshift({
+    author: comment.author || "Anonymous Scholar",
+    date: "Just now",
+    text: comment.text
+  });
+  localStorage.setItem(STORAGE_KEYS.COMMENTS, JSON.stringify(allComments));
+  return allComments[postId];
+}
+
+/**
+ * Like Counter
+ */
+function getLikes(postId, defaultCount = 0) {
+  const likedMap = JSON.parse(localStorage.getItem(STORAGE_KEYS.LIKES) || '{}');
+  return (likedMap[postId] !== undefined) ? likedMap[postId] : defaultCount;
+}
+
+function toggleLike(postId, defaultCount = 0) {
+  const likedMap = JSON.parse(localStorage.getItem(STORAGE_KEYS.LIKES) || '{}');
+  const userLikedKey = 'user_has_liked_' + postId;
+  const hasLiked = localStorage.getItem(userLikedKey) === 'true';
+  
+  let currentLikes = (likedMap[postId] !== undefined) ? likedMap[postId] : defaultCount;
+  
+  if (hasLiked) {
+    currentLikes = Math.max(0, currentLikes - 1);
+    localStorage.removeItem(userLikedKey);
+  } else {
+    currentLikes += 1;
+    localStorage.setItem(userLikedKey, 'true');
+  }
+  
+  likedMap[postId] = currentLikes;
+  localStorage.setItem(STORAGE_KEYS.LIKES, JSON.stringify(likedMap));
+  return { likes: currentLikes, isLiked: !hasLiked };
+}
+
+
+/**
+ * INVENTOSPHERE - Article Reader Script
+ * Dynamic post loading, reading progress, likes, and comment system
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  initMobileMenu();
+  loadArticle();
+  initReadingProgressBar();
+});
+
+function initTheme() {
+  const themeToggleBtn = document.getElementById('theme-toggle-btn');
+  const savedTheme = localStorage.getItem('inventosphere_theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  updateThemeIcon(savedTheme);
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const nextTheme = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('inventosphere_theme', nextTheme);
+      updateThemeIcon(nextTheme);
+    });
+  }
+}
+
+function updateThemeIcon(theme) {
+  const themeToggleBtn = document.getElementById('theme-toggle-btn');
+  if (themeToggleBtn) {
+    themeToggleBtn.innerHTML = theme === 'dark' 
+      ? `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>` 
+      : `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+  }
+}
+
+function initMobileMenu() {
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const navMenu = document.getElementById('nav-menu');
+  if (menuBtn && navMenu) {
+    menuBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('show');
+    });
+  }
+}
+
+function initReadingProgressBar() {
+  const bar = document.getElementById('reading-progress-bar');
+  if (!bar) return;
+
+  window.addEventListener('scroll', () => {
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
+    bar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+  });
+}
+
+function loadArticle() {
+  const params = new URLSearchParams(window.location.search);
+  const postId = params.get('id');
+
+  const post = postId ? getPostByIdOrSlug(postId) : getAllPosts()[0];
+
+  if (!post) {
+    document.getElementById('article-content-container').innerHTML = `
+      <div class="empty-state">
+        <h2>Invention Not Found</h2>
+        <p style="margin: 1rem 0;">The requested article could not be retrieved.</p>
+        <a href="index.html" class="btn-primary">Return to Inventions</a>
+      </div>
+    `;
+    return;
+  }
+
+  // Update Page Title
+  document.title = `${post.title} — InventoSphere`;
+
+  // Render Header
+  document.getElementById('article-category-badge').textContent = `${post.category} Invention`;
+  document.getElementById('article-category-badge').className = `badge ${getBadgeClass(post.category)}`;
+  document.getElementById('article-headline').textContent = post.title;
+  document.getElementById('article-author-name').textContent = post.author.name;
+  document.getElementById('article-author-avatar').textContent = post.author.initials;
+  document.getElementById('article-date').textContent = post.date;
+  document.getElementById('article-readtime').textContent = post.readTime;
+  
+  const heroImg = document.getElementById('article-hero-img');
+  heroImg.src = post.image;
+  heroImg.alt = post.title;
+  heroImg.setAttribute('referrerpolicy', 'no-referrer');
+  heroImg.onerror = function() { this.onerror = null; this.src = 'assets/images/tech-default.svg'; };
+
+  // Render Specifications Box
+  let specsHtml = '';
+  if (post.specs && Object.keys(post.specs).length > 0) {
+    specsHtml = `
+      <div class="tech-spec-box">
+        <div class="tech-spec-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+          Technical Innovation Blueprint
+        </div>
+        <div class="info-grid">
+          ${Object.entries(post.specs).map(([key, val]) => `
+            <div class="info-box">
+              <h4>${key}</h4>
+              <p>${val}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  // Render Body
+  document.getElementById('article-body-content').innerHTML = specsHtml + post.content;
+
+  // Setup Likes
+  initLikes(post.id, post.likes);
+
+  // Setup Share
+  initShare(post.title);
+
+  // Setup Comments
+  initComments(post.id);
+
+  // Render Related Articles
+  renderRelatedArticles(post.id, post.category);
+}
+
+function initLikes(postId, defaultCount) {
+  const likeBtn = document.getElementById('like-btn');
+  const likeCountSpan = document.getElementById('like-count');
+  if (!likeBtn || !likeCountSpan) return;
+
+  const currentCount = getLikes(postId, defaultCount);
+  const userHasLiked = localStorage.getItem('user_has_liked_' + postId) === 'true';
+
+  likeCountSpan.textContent = currentCount;
+  likeBtn.classList.toggle('liked', userHasLiked);
+
+  likeBtn.addEventListener('click', () => {
+    const res = toggleLike(postId, defaultCount);
+    likeCountSpan.textContent = res.likes;
+    likeBtn.classList.toggle('liked', res.isLiked);
+  });
+}
+
+function initShare(title) {
+  const shareBtn = document.getElementById('share-btn');
+  if (!shareBtn) return;
+
+  shareBtn.addEventListener('click', async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: title,
+          url: window.location.href
+        });
+      } catch (e) {
+        // Fallback to copy
+        copyToClipboard();
+      }
+    } else {
+      copyToClipboard();
+    }
+  });
+}
+
+function copyToClipboard() {
+  navigator.clipboard.writeText(window.location.href);
+  const shareBtn = document.getElementById('share-btn');
+  const originalText = shareBtn.innerHTML;
+  shareBtn.innerHTML = `
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"/>
+    </svg>
+    Link Copied!
+  `;
+  setTimeout(() => {
+    shareBtn.innerHTML = originalText;
+  }, 2200);
+}
+
+function initComments(postId) {
+  const commentsList = document.getElementById('comments-list');
+  const commentForm = document.getElementById('comment-form');
+  const authorInput = document.getElementById('comment-author-input');
+  const textInput = document.getElementById('comment-text-input');
+
+  function render() {
+    const comments = getComments(postId);
+    commentsList.innerHTML = comments.map(c => `
+      <div class="comment-card">
+        <div class="comment-header">
+          <span class="comment-author">${escapeHtml(c.author)}</span>
+          <span style="color: var(--text-muted);">${c.date}</span>
+        </div>
+        <p style="color: var(--text-secondary);">${escapeHtml(c.text)}</p>
+      </div>
+    `).join('');
+  }
+
+  render();
+
+  if (commentForm) {
+    commentForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = textInput.value.trim();
+      const author = authorInput.value.trim() || 'Tech Enthusiast';
+
+      if (!text) return;
+
+      addComment(postId, { author, text });
+      textInput.value = '';
+      render();
+    });
+  }
+}
+
+function renderRelatedArticles(currentPostId, category) {
+  const container = document.getElementById('related-articles-grid');
+  if (!container) return;
+
+  const allPosts = getAllPosts();
+  const related = allPosts
+    .filter(p => p.id !== currentPostId && (p.category === category || true))
+    .slice(0, 3);
+
+  container.innerHTML = related.map(p => `
+    <article class="post-card">
+      <div class="post-thumb-wrapper">
+        <img src="${p.image}" alt="${p.title}" class="post-thumb" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='assets/images/tech-default.svg';">
+      </div>
+      <div class="post-content">
+        <span class="badge ${getBadgeClass(p.category)}">${p.category}</span>
+        <h4 class="post-title" style="font-size: 1.1rem;">
+          <a href="article.html?id=${p.id}">${p.title}</a>
+        </h4>
+        <div class="post-footer" style="margin-top: auto;">
+          <span>${p.readTime}</span>
+          <a href="article.html?id=${p.id}" style="color: var(--accent-cyan); font-weight: 600;">Read &rarr;</a>
+        </div>
+      </div>
+    </article>
+  `).join('');
+}
+
+function getBadgeClass(category) {
+  switch (category.toLowerCase()) {
+    case 'ai': return 'badge-ai';
+    case 'quantum': return 'badge-quantum';
+    case 'robotics': return 'badge-robotics';
+    case 'energy': return 'badge-energy';
+    case 'biotech': return 'badge-biotech';
+    default: return 'badge-ai';
+  }
+}
+
+function escapeHtml(str) {
+  return str.replace(/[&<>'"]/g, 
+    tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+  );
+}
+
+</script>
 </body>
 </html>
